@@ -16,6 +16,6 @@ public class DatabaseTestingClass {
         FileReader fileReader = new FileReader();
         
         fileReader.setFileName("/home/user/Downloads/smalltest.txt");
-        fileReader.connectToDB();
+        fileReader.connectToDB(true, true, true);
     }
 }
