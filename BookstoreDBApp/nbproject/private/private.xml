@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/user/NetBeansProjects/BookstoreDBApp/src/bookstoredbapp/CustomerInformation.java</file>
-            <file>file:/home/user/NetBeansProjects/BookstoreDBApp/src/bookstoredbapp/BookStoreDBInterface.java</file>
-            <file>file:/home/user/NetBeansProjects/BookstoreDBApp/src/bookstoredbapp/DatabaseAccessor.java</file>
-            <file>file:/home/user/NetBeansProjects/BookstoreDBApp/src/bookstoredbapp/Series.java</file>
+            <file>file:/home/user/NetBeansProjects/BookstoreDBApp/src/bookstoredbapp/DatabaseTestingClass.java</file>
+            <file>file:/home/user/NetBeansProjects/BookstoreDBApp/src/bookstoredbapp/BookstoreApp.java</file>
+            <file>file:/home/user/NetBeansProjects/BookstoreDBApp/src/bookstoredbapp/FileReader.java</file>
+            <file>file:/home/user/NetBeansProjects/BookstoreDBApp/src/bookstoredbapp/DBConnector.java</file>
         </group>
     </open-files>
 </project-private>
