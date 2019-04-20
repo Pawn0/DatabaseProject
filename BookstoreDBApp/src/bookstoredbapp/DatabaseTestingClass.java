@@ -10,12 +10,10 @@ package bookstoredbapp;
  * @author user
  */
 public class DatabaseTestingClass {
-    public static void main(String [] args)
-    {
+
+    public static void main(String[] args) {
         System.out.println("Test Begining");
-        FileReader fileReader = new FileReader();
-        
-        fileReader.setFileName("/home/user/Downloads/smalltest.txt");
-        fileReader.connectToDB(true, true, true);
+        DatabaseExplorer databaseExplorer = new DatabaseExplorer();
+        databaseExplorer.findSubscriptionsViaCustomerName("Damien Wall");
     }
 }
