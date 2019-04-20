@@ -15,12 +15,12 @@ public class DatabaseUpdater {
         //query type 0 will find subscriptions via customer name
         //type 1 will find customers via telephoneNumber
         //type 2 will find
-        executeChange(result, typeOfQuery);
+        executeChange(typeOfQuery);
 
         dbConnector.close();
     }
 
-    private void executeChange(ResultSet resultSet, int changeType) {
+    private void executeChange( int changeType) {
     }
 
     public void addNewCustomer() {

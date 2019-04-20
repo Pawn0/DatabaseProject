@@ -36,10 +36,11 @@ public class DatabaseExplorer {
     }
 
     public void comicBooksBySeriesName(String series_name) {
-
+        String SQL = "SELECT issue_number, issue_date FROM comic_book WHERE series_title = '" + series_name + "'";
+        exploreDB(SQL, 2);
     }
 
-    public void comicBooksBuDateTheyComeOut(String date) {
+    public void comicBooksByDateTheyComeOut(String date) {
 
     }
 
