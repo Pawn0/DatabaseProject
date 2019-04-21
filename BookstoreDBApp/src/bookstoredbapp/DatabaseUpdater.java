@@ -20,7 +20,7 @@ public class DatabaseUpdater {
         dbConnector.close();
     }
 
-    private void executeChange( int changeType) {
+    private void executeChange(int changeType) {
     }
 
     public void addNewCustomer() {

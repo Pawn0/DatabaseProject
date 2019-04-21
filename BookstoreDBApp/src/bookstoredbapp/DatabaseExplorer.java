@@ -2,7 +2,9 @@ package bookstoredbapp;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -36,24 +38,38 @@ public class DatabaseExplorer {
     }
 
     public void comicBooksBySeriesName(String series_name) {
-        String SQL = "SELECT issue_number, issue_date FROM comic_book WHERE series_title = '" + series_name + "'";
-        exploreDB(SQL, 2);
+        String SQL = "SELECT series_title FROM comic_book_series WHERE series_title = '" + series_name + "'";
+        exploreDB(SQL, 0);
     }
 
-    public void comicBooksByDateTheyComeOut(String date) {
+    public void comicBooksByDateTheyComeOut(Date date) {
+        String searchDate = simpleDateFormat.format(date);
+        String SQL = "SELECT comic_book_series, issue_date FROM comic_book_series WHERE issue_date = '" + searchDate + "'";
+        exploreDB(SQL, 3);
 
     }
 
     public void comicBooksByPublisher(String publisher) {
-
+        String SQL = "SELECT series_title FROM comic_book_series WHERE publisher = '" + publisher + "'";
+        exploreDB(SQL, 0);
     }
 
     public void customersByComicBookSeriesSubscribed(String series) {
-
+        String SQL = "SELECT customer_name FROM subscription WHERE series_title = '" + series + "'";
+        exploreDB(SQL, 1);
     }
 
     public void comicBooksOrderOnAGivenDateAndHowMany(String date) {
-
+        String SQL = "SELECT\n" +
+        "subscription.series_title,\n" +
+        "  COUNT(*) AS number_ordered\n" +
+        "FROM\n" +
+        "  subscription, comic_book\n" +
+        "WHERE \n" +
+        "  subscription.series_title = comic_book.series_title AND comic_book.issue_date = '"+ simpleDateFormat.format(date) +"' \n" +
+        "GROUP BY\n" +
+        "  subscription.series_title";
+        exploreDB(SQL, 2);
     }
 
     //prints out the result set for all the customer subscriptions
@@ -74,7 +90,19 @@ public class DatabaseExplorer {
                         String customer_name = rs.getString("customer_name");
                         displayData.add(customer_name);
                         System.out.println(customer_name);
-
+                        break;
+                    case 2:
+                        String series_title_on_given_day = rs.getString("series_title");
+                        String number_ordered = rs.getString("number_ordered");
+                        displayData.add(series_title_on_given_day + " " + number_ordered);
+                        System.out.println(series_title_on_given_day + " " + number_ordered);
+                        break;
+                    case 3:
+                        String issue_number = rs.getString("issue_number");
+                        Date issue_date = rs.getDate("issue_date");
+                        displayData.add(issue_number +" "+issue_date.toString());
+                        System.out.println(issue_number +" "+issue_date.toString());
+                        break;
                 }
             }
         } catch (SQLException e) {
@@ -85,4 +113,7 @@ public class DatabaseExplorer {
     //display data is what is used to get the information into one convenient location
     //we should call a function and then read the display data to get it to display somwhere
     ArrayList<String> displayData;
+    
+    String pattern = "yyyy-MM-dd";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 }
