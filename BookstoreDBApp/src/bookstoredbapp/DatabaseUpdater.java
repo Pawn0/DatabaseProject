@@ -25,10 +25,12 @@ public class DatabaseUpdater {
         UpdateDB(SQL);
     }
 
-    public void updateCustomer() {
+    public void updateCustomer(String name, String address, String phoneNumber, int customerID) {
+        String SQL = "UPDATE customers SET  customer_name = '" + name + "', address = '"+address + "',"+ "phone ='"+ phoneNumber +"' WHERE customer_id = "+customerID;
     }
 
-    public void changeDateComicBookIsReleased() {
+    public void changeDateComicBookIsReleased(int issueID, String series_title, String date) {
+        
     }
 
     public void deleteCustomer() {
