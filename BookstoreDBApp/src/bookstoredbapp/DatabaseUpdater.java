@@ -27,16 +27,20 @@ public class DatabaseUpdater {
 
     public void updateCustomer(String name, String address, String phoneNumber, int customerID) {
         String SQL = "UPDATE customers SET  customer_name = '" + name + "', address = '"+address + "',"+ "phone ='"+ phoneNumber +"' WHERE customer_id = "+customerID;
+        UpdateDB(SQL);
     }
 
-    public void changeDateComicBookIsReleased(int issueID, String series_title, String date) {
-        
+    public void changeDateComicBookIsReleased(String date, int comic_book_id) {
+        String SQL = "UPDATE customers SET  issue_date = '" + date + "WHERE comic_book_id = "+comic_book_id;
+        UpdateDB(SQL);
     }
 
     public void deleteCustomer() {
         deleteSubscriptionForCustomer();
+        //UpdateDB(SQL);
     }
 
     public void deleteSubscriptionForCustomer() {
+        //UpdateDB(SQL);
     }
 }
