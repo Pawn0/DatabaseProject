@@ -76,7 +76,7 @@ public class DatabaseExplorer {
     //essentially its saying result set get the value from colum series title
     //add it to display data, and print it out on the console
     private void printResultSet(ResultSet rs, int type) {
-        displayData.clear();
+        //displayData.clear();
         try {
             while (rs.next()) {
 
@@ -112,7 +112,7 @@ public class DatabaseExplorer {
 
     //display data is what is used to get the information into one convenient location
     //we should call a function and then read the display data to get it to display somwhere
-    ArrayList<String> displayData;
+    ArrayList<String> displayData = new ArrayList<String>();
     
     String pattern = "yyyy-MM-dd";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
