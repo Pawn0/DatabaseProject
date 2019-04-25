@@ -25,8 +25,8 @@ public class DatabaseUpdater {
         UpdateDB(SQL);
     }
 
-    public void updateCustomer(String name, String address, String phoneNumber, int customerID) {
-        String SQL = "UPDATE customers SET  customer_name = '" + name + "', address = '"+address + "',"+ "phone ='"+ phoneNumber +"' WHERE customer_id = "+customerID;
+    public void updateCustomer(String name, String address, String phoneNumber, int customer_id) {
+        String SQL = "UPDATE customers SET  customer_name = '" + name + "', address = '"+address + "',"+ "phone ='"+ phoneNumber +"' WHERE customer_id = "+customer_id + ";";
         UpdateDB(SQL);
     }
 
@@ -35,12 +35,19 @@ public class DatabaseUpdater {
         UpdateDB(SQL);
     }
 
-    public void deleteCustomer() {
-        deleteSubscriptionForCustomer();
-        //UpdateDB(SQL);
+    public void deleteCustomer(String customer_name) {
+        deleteAllSubscriptionForCustomer(customer_name);
+        String SQL = "DELETE FROM customers WHERE customer_name ="+ customer_name +";";
+        UpdateDB(SQL);
     }
 
-    public void deleteSubscriptionForCustomer() {
-        //UpdateDB(SQL);
+    public void deleteAllSubscriptionForCustomer(String customer_name) {
+        String SQL = "DELETE FROM subscription WHERE customer_name ="+ customer_name +";";
+        UpdateDB(SQL);
+    }
+    
+    public void deleteOneSubscriptionForCustomer(int subscription_id){
+        String SQL = "DELETE FROM subscription WHERE subscription_id = " + subscription_id + ";";
+        UpdateDB(SQL);
     }
 }
