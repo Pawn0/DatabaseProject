@@ -42,10 +42,9 @@ public class DatabaseExplorer {
         exploreDB(SQL, 0);
     }
 
-    public void comicBooksByDateTheyComeOut(Date date) {
-        String searchDate = simpleDateFormat.format(date);
-        String SQL = "SELECT comic_book_series, issue_date FROM comic_book_series WHERE issue_date = '" + searchDate + "'";
-        exploreDB(SQL, 3);
+    public void comicBooksByDateTheyComeOut(String date) {
+        String SQL = "SELECT series_title, issue_date FROM comic_book WHERE issue_date = '" + date + "'";
+        exploreDB(SQL, 4);
 
     }
 
@@ -66,7 +65,7 @@ public class DatabaseExplorer {
         "FROM\n" +
         "  subscription, comic_book\n" +
         "WHERE \n" +
-        "  subscription.series_title = comic_book.series_title AND comic_book.issue_date = '"+ simpleDateFormat.format(date) +"' \n" +
+        "  subscription.series_title = comic_book.series_title AND comic_book.issue_date = '"+ date +"' \n" +
         "GROUP BY\n" +
         "  subscription.series_title";
         exploreDB(SQL, 2);
@@ -102,6 +101,12 @@ public class DatabaseExplorer {
                         Date issue_date = rs.getDate("issue_date");
                         displayData.add(issue_number +" "+issue_date.toString());
                         System.out.println(issue_number +" "+issue_date.toString());
+                        break;
+                    case 4:
+                        String series_title_for_date_come_out = rs.getString("series_title");
+                        Date issue_date_come_out = rs.getDate("issue_date");
+                        displayData.add(series_title_for_date_come_out +" "+issue_date_come_out.toString());
+                        System.out.println(series_title_for_date_come_out +" "+issue_date_come_out.toString());
                         break;
                 }
             }
