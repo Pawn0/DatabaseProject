@@ -95,10 +95,10 @@ public class DatabaseSystem {
                         System.out.println("Update Data in Database Selected!");
                         System.out.println("1. Add New Customer.");
                         System.out.println("2. Add New Subscription");
-                        System.out.println("3. Change Date Comic Book Released");
-                        System.out.println("4. Delete All Subscriptions for Customer");
+                        System.out.println("3. Update Customer");
+                        System.out.println("4. Change Date Comic Book Released");
                         System.out.println("5. Delete Customer");
-                        System.out.println("6. Update Customer");
+                        System.out.println("6. Delete All Subscriptions for Customer");
                         System.out.println("7. Exit");
                         selection = scanner.nextInt();
                         scanner.nextLine();
@@ -122,7 +122,7 @@ public class DatabaseSystem {
                                     customerName = scanner.nextLine();
                                     databaseUpdater.addNewSubscription(seriesTitle, customerName);
                                     break;
-                                case 3:
+                                case 4:
                                     System.out.println("Please enter date comic book is released");
                                     System.out.print("Date: ");
                                     String date = scanner.nextLine();
@@ -131,9 +131,17 @@ public class DatabaseSystem {
                                     scanner.nextLine();
                                     databaseUpdater.changeDateComicBookIsReleased(date, bookId);
                                     break;
-                                case 4:
+                                case 5:
                                     System.out.println("Please enter the name of the customer to delete");
                                     System.out.print("Customer Name: ");
+                                    customerName = scanner.nextLine();
+                                    databaseUpdater.deleteCustomer(customerName);
+                                    break;
+                                case 6:
+                                    System.out.println("Please enter customer to delete all subscriptions for");
+                                    System.out.print("Customer Name: ");
+                                    customerName = scanner.nextLine();
+                                    databaseUpdater.deleteAllSubscriptionForCustomer(customerName);
                                     break;
                             }
                         }
