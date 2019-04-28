@@ -29,7 +29,7 @@ public class FileReader {
     }
     
     //this function will be used to connect to the DB for inserting data
-    public void connectToDB(boolean queryFlag, boolean insertAllDataFlag, boolean updateDataFlag) {
+    public void connectToDB() {
         DBConnector dbconnector = new DBConnector("spring19group2", "jZXg7V3p3VkD");
 
         //we have to first have the comic series data
