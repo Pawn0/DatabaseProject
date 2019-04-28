@@ -88,7 +88,6 @@ public class DatabaseSystem {
                                     databaseExplorer.findSubscriptionsViaCustomerName(customerName);
                                     break;
                             }
-                        }else{
                         }
                         break;
                         
@@ -98,27 +97,46 @@ public class DatabaseSystem {
                         System.out.println("2. Add New Subscription");
                         System.out.println("3. Change Date Comic Book Released");
                         System.out.println("4. Delete All Subscriptions for Customer");
-                        System.out.println("5. ");
-                        System.out.println("6.");
+                        System.out.println("5. Delete Customer");
+                        System.out.println("6. Update Customer");
                         System.out.println("7. Exit");
-//        
-//        System.out.println("Adding new customer.\n");
-//        databaseUpdater.addNewCustomer("Gerardo Gonzalez Moctezuma", "601 S MLK JrDrive", "336-222-2222");
-//        
-//        System.out.println("Adding new subscription.\n");
-//        databaseUpdater.addNewSubscription("West Coast Flat lad", "Gerardo Gonzalez Moctezuma");
-//        
-//        System.out.println("chanigng date comic book released.\n");
-//        databaseUpdater.changeDateComicBookIsReleased("0019-06-27", 1);
-//        
-//        System.out.println("delete all subscription for customer.\n");
-//        databaseUpdater.deleteAllSubscriptionForCustomer("Gerardo Gonzalez Moctezuma");
-//        
-//        System.out.println("delete customer. First subcriptions then customer. \n");
-//        databaseUpdater.deleteCustomer("Gerardo Gonzalez Moctezuma");
-//        
-//        System.out.println("update customer.\n");
-//        databaseUpdater.updateCustomer("Tanya Dalton", "601 S MLK Jr Drive", "097-272-9181", 2);
+                        selection = scanner.nextInt();
+                        scanner.nextLine();
+                        if (selection != 7){
+                            switch(selection){
+                                case 1:
+                                    System.out.println("Please enter the customer information:");
+                                    System.out.print("Customer Name: ");
+                                    String customerName = scanner.nextLine();
+                                    System.out.print("Customer Address: ");
+                                    String customerAddress = scanner.nextLine();
+                                    System.out.print("Customer Phone Number:");
+                                    String phoneNumber = scanner.nextLine();
+                                    databaseUpdater.addNewCustomer(customerName, customerAddress, phoneNumber);
+                                    break;
+                                case 2:
+                                    System.out.println("Please enter customer subscription information: ");
+                                    System.out.print("Series Title:");
+                                    String seriesTitle = scanner.nextLine();
+                                    System.out.print("Customer Name:");
+                                    customerName = scanner.nextLine();
+                                    databaseUpdater.addNewSubscription(seriesTitle, customerName);
+                                    break;
+                                case 3:
+                                    System.out.println("Please enter date comic book is released");
+                                    System.out.print("Date: ");
+                                    String date = scanner.nextLine();
+                                    System.out.print("Book ID: ");
+                                    int bookId = scanner.nextInt();
+                                    scanner.nextLine();
+                                    databaseUpdater.changeDateComicBookIsReleased(date, bookId);
+                                    break;
+                                case 4:
+                                    System.out.println("Please enter the name of the customer to delete");
+                                    System.out.print("Customer Name: ");
+                                    break;
+                            }
+                        }
                         break;
                 }
             
