@@ -28,7 +28,7 @@ public class DatabaseExplorer {
 
     //perform the query to find the subscriptions via customer name.
     public void findSubscriptionsViaCustomerName(String customerName) {
-        String SQL = "SELECT series_title FROM subscription, customers WHERE subscription.customer_id = customers.customer_id AND customers.customer_name = '"+ customerName+"'";
+        String SQL = "SELECT series_title FROM subscription, customers WHERE subscription.customer_id = customers.customer_id AND customers.customer_name = '"+ customerName.replace("'","''")+"'";
         exploreDB(SQL, 0);
     }
 
