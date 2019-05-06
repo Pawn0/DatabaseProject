@@ -28,7 +28,7 @@ public class DatabaseExplorer {
 
     //perform the query to find the subscriptions via customer name.
     public void findSubscriptionsViaCustomerName(String customerName) {
-        String SQL = "SELECT series_title FROM subscription WHERE customer_name = '" + customerName + "'";
+        String SQL = "SELECT series_title FROM subscription, customers WHERE subscription.customer_id = customers.customer_id AND customers.customer_name = '"+ customerName+"'";
         exploreDB(SQL, 0);
     }
 
@@ -38,23 +38,23 @@ public class DatabaseExplorer {
     }
 
     public void comicBooksBySeriesName(String series_name) {
-        String SQL = "SELECT series_title FROM comic_book_series WHERE series_title = '" + series_name + "'";
-        exploreDB(SQL, 0);
+        String SQL = "SELECT issue_number, publish_date FROM comic_book_belongs_to WHERE series_title = '" + series_name + "'";
+        exploreDB(SQL, 3);
     }
 
     public void comicBooksByDateTheyComeOut(String date) {
-        String SQL = "SELECT series_title, issue_date FROM comic_book WHERE issue_date = '" + date + "'";
+        String SQL = "SELECT series_title, publish_date FROM comic_book_belongs_to WHERE publish_date = '" + date + "'";
         exploreDB(SQL, 4);
 
     }
 
     public void comicBooksByPublisher(String publisher) {
-        String SQL = "SELECT series_title FROM comic_book_series WHERE publisher = '" + publisher + "'";
+        String SQL = "SELECT series_title FROM series WHERE publisher = '" + publisher + "'";
         exploreDB(SQL, 0);
     }
 
     public void customersByComicBookSeriesSubscribed(String series) {
-        String SQL = "SELECT customer_name FROM subscription WHERE series_title = '" + series + "'";
+        String SQL = "SELECT customer_name FROM subscription, customers WHERE series_title = '" + series + "' AND subscription.customer_id = customers.customer_id";
         exploreDB(SQL, 1);
     }
 
@@ -63,9 +63,9 @@ public class DatabaseExplorer {
         "subscription.series_title,\n" +
         "  COUNT(*) AS number_ordered\n" +
         "FROM\n" +
-        "  subscription, comic_book\n" +
+        "  subscription, comic_book_belongs_to\n" +
         "WHERE \n" +
-        "  subscription.series_title = comic_book.series_title AND comic_book.issue_date = '"+ date +"' \n" +
+        "  subscription.series_title = comic_book_belongs_to.series_title AND comic_book_belongs_to.publish_date = '"+ date +"' \n" +
         "GROUP BY\n" +
         "  subscription.series_title";
         exploreDB(SQL, 2);
@@ -98,13 +98,13 @@ public class DatabaseExplorer {
                         break;
                     case 3:
                         String issue_number = rs.getString("issue_number");
-                        Date issue_date = rs.getDate("issue_date");
+                        Date issue_date = rs.getDate("publish_date");
                         displayData.add(issue_number +" "+issue_date.toString());
                         System.out.println(issue_number +" "+issue_date.toString());
                         break;
                     case 4:
                         String series_title_for_date_come_out = rs.getString("series_title");
-                        Date issue_date_come_out = rs.getDate("issue_date");
+                        Date issue_date_come_out = rs.getDate("publish_date");
                         displayData.add(series_title_for_date_come_out +" "+issue_date_come_out.toString());
                         System.out.println(series_title_for_date_come_out +" "+issue_date_come_out.toString());
                         break;

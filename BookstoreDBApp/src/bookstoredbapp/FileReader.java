@@ -6,6 +6,7 @@ import edu.wssu.compsci.databases.comicbook.ComicSeries;
 import edu.wssu.compsci.databases.comicbook.Issue;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.io.File;
 
 /**
  *
@@ -15,7 +16,8 @@ public class FileReader {
     
     //read from the file and get the customer list and the series
     public void readFile() {
-        ComicBookParser bookParser = new ComicBookParser(fileName);
+        ComicBookParser bookParser = new ComicBookParser(fileName.getAbsolutePath());
+        System.out.println(fileName);
         customerList = bookParser.getCustomerList();
         System.out.println(customerList.toString());
 
@@ -25,7 +27,7 @@ public class FileReader {
 
     //function to set filename for futher reading
     public void setFileName(String fileName) {
-        this.fileName = fileName;
+        this.fileName = new File(fileName);
     }
     
     //this function will be used to connect to the DB for inserting data
@@ -36,20 +38,21 @@ public class FileReader {
         //so that customers will have something to subscribe to
         readFile();
         insertComicSeriesData(dbconnector);
-        insertCustomerData(dbconnector);
+        insertCustomerData(dbconnector, 1);
 
         dbconnector.close();
     }
 
     //inserts the data and also it makes sure that the customer subscriptions are available
-    public void insertCustomerData(DBConnector dbConnector) {
+    public void insertCustomerData(DBConnector dbConnector, int customer_id) {
         for (Customer customer : customerList) {
             dbConnector.changingQuery(prepareSQLStatementForCustomer(customer));
             
             List<String> subscriptionList = customer.subscriptions();
             for (String subscription : subscriptionList) {
-                dbConnector.changingQuery(prepareSQLStatementForSubscription(subscription, customer));
+                dbConnector.changingQuery(prepareSQLStatementForSubscription(subscription, customer_id));
             }
+            customer_id++;
         }
     }
 
@@ -66,7 +69,7 @@ public class FileReader {
     }
 
     public String prepareSQLStatementForSeries(ComicSeries comicSeries) {
-        String SQL = "INSERT INTO comic_book_series (series_title, publisher)" + "VALUES (" + "'" + comicSeries.getTitle() + "','" + comicSeries.getPublisher() + "')";
+        String SQL = "INSERT INTO series (series_title, publisher)" + "VALUES (" + "'" + comicSeries.getTitle() + "','" + comicSeries.getPublisher() + "')";
 
         return SQL;
     }
@@ -76,7 +79,7 @@ public class FileReader {
     public String prepareSQLStatementForIssue(Issue issue, ComicSeries comicSeries) {
         //2016-06-23
         String issueDate = simpleDateFormat.format(issue.getDate());
-        String SQL = "INSERT INTO comic_book (issue_date, issue_number, series_title)" + "VALUES ('" + issueDate + "',"+ issue.getNumber() +",'" + comicSeries.getTitle() + "')";
+        String SQL = "INSERT INTO comic_book_belongs_to (publish_date, issue_number, series_title)" + "VALUES ('" + issueDate + "',"+ issue.getNumber() +",'" + comicSeries.getTitle() + "')";
 
         return SQL;
     }
@@ -91,9 +94,9 @@ public class FileReader {
     }
 
     //perpares sql for inserting subscriptions
-    public String prepareSQLStatementForSubscription(String subscription, Customer customer) {
-        String SQL = "INSERT INTO subscription (series_title, customer_name)"
-                + "VALUES ('" + subscription + "','" + customer.getName().replace("'","''") + "')";
+    public String prepareSQLStatementForSubscription(String subscription, int customer_id) {
+        String SQL = "INSERT INTO subscription (series_title, customer_id)"
+                + "VALUES ('" + subscription + "'," + customer_id + ")";
 
         return SQL;
     }
@@ -104,5 +107,5 @@ public class FileReader {
 
     public List<Customer> customerList;
     public List<ComicSeries> comicSeriesList;
-    public String fileName;
+    public File fileName;
 }
