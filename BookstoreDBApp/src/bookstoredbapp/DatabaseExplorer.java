@@ -54,7 +54,7 @@ public class DatabaseExplorer {
     }
 
     public void customersByComicBookSeriesSubscribed(String series) {
-        String SQL = "SELECT customer_id, customer_name FROM subscription, customers WHERE series_title = '" + series + "' AND subscription.customer_id = customers.customer_id";
+        String SQL = "SELECT subscription.customer_id, customer_name FROM subscription, customers WHERE series_title = '" + series + "' AND subscription.customer_id = customers.customer_id";
         exploreDB(SQL, 1);
     }
 

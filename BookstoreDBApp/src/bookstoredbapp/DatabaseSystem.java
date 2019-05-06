@@ -142,7 +142,7 @@ public class DatabaseSystem {
                                     System.out.println("Please enter date comic book is released");
                                     System.out.print("Date: ");
                                     String date = scanner.nextLine();
-                                    System.out.print("Book ID: ");
+                                    System.out.print("Issue Number: ");
                                     int bookId = scanner.nextInt();
                                     scanner.nextLine();
                                     System.out.print("Series Title:");
