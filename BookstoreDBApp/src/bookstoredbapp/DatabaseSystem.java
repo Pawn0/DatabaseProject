@@ -100,6 +100,7 @@ public class DatabaseSystem {
                         System.out.println("5. Delete Customer");
                         System.out.println("6. Delete All Subscriptions for Customer");
                         System.out.println("7. Exit");
+                        System.out.print("Please enter selection:");
                         selection = scanner.nextInt();
                         scanner.nextLine();
                         if (selection != 7){
@@ -118,9 +119,23 @@ public class DatabaseSystem {
                                     System.out.println("Please enter customer subscription information: ");
                                     System.out.print("Series Title:");
                                     String seriesTitle = scanner.nextLine();
-                                    System.out.print("Customer Name:");
+                                    System.out.print("Customer ID:");
+                                    int customer_id = scanner.nextInt();
+                                    scanner.nextLine();
+                                    databaseUpdater.addNewSubscription(seriesTitle, customer_id);
+                                    break;
+                                case 3:
+                                    System.out.println("Please enter the customer information:");
+                                    System.out.print("Customer Name: ");
                                     customerName = scanner.nextLine();
-                                    databaseUpdater.addNewSubscription(seriesTitle, customerName);
+                                    System.out.print("Customer Address: ");
+                                    customerAddress = scanner.nextLine();
+                                    System.out.print("Customer Phone Number:");
+                                    phoneNumber = scanner.nextLine();
+                                    System.out.print("Customer ID:");
+                                    customer_id = scanner.nextInt();
+                                    scanner.nextLine();
+                                    databaseUpdater.updateCustomer(customerName, customerAddress, phoneNumber, customer_id);
                                     break;
                                 case 4:
                                     System.out.println("Please enter date comic book is released");
@@ -132,16 +147,18 @@ public class DatabaseSystem {
                                     databaseUpdater.changeDateComicBookIsReleased(date, bookId);
                                     break;
                                 case 5:
-                                    System.out.println("Please enter the name of the customer to delete");
-                                    System.out.print("Customer Name: ");
-                                    customerName = scanner.nextLine();
-                                    databaseUpdater.deleteCustomer(customerName);
+                                    System.out.println("Please enter the ID number of the customer to delete");
+                                    System.out.print("Customer ID:");
+                                    customer_id = scanner.nextInt();
+                                    scanner.nextLine();
+                                    databaseUpdater.deleteCustomer(customer_id);
                                     break;
                                 case 6:
                                     System.out.println("Please enter customer to delete all subscriptions for");
-                                    System.out.print("Customer Name: ");
-                                    customerName = scanner.nextLine();
-                                    databaseUpdater.deleteAllSubscriptionForCustomer(customerName);
+                                    System.out.print("Customer ID:");
+                                    customer_id = scanner.nextInt();
+                                    scanner.nextLine();
+                                    databaseUpdater.deleteAllSubscriptionForCustomer(customer_id);
                                     break;
                             }
                         }

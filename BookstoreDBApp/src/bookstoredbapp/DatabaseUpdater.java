@@ -18,9 +18,9 @@ public class DatabaseUpdater {
         UpdateDB(SQL);
     }
 
-    public void addNewSubscription(String subscription, String customerName) {
-        String SQL = "INSERT INTO subscription (series_title, customer_name)"
-                + "VALUES ('" + subscription + "','" + customerName.replace("'","''") + "')";
+    public void addNewSubscription(String subscription, int customer_id) {
+        String SQL = "INSERT INTO subscription (series_title, customer_id)"
+                + "VALUES ('" + subscription + "',"+ customer_id +")";
         UpdateDB(SQL);
     }
 
@@ -34,14 +34,14 @@ public class DatabaseUpdater {
         UpdateDB(SQL);
     }
 
-    public void deleteCustomer(String customer_name) {
-        deleteAllSubscriptionForCustomer(customer_name);
-        String SQL = "DELETE FROM customers WHERE customer_name = '"+ customer_name.replace("'","''") +"';";
+    public void deleteCustomer(int customer_id) {
+        deleteAllSubscriptionForCustomer(customer_id);
+        String SQL = "DELETE FROM customers WHERE customer_id = "+ customer_id +";";
         UpdateDB(SQL);
     }
 
-    public void deleteAllSubscriptionForCustomer(String customer_name) {
-        String SQL = "DELETE FROM subscription WHERE customer_name ='"+ customer_name.replace("'","''") +"';";
+    public void deleteAllSubscriptionForCustomer(int customer_id) {
+        String SQL = "DELETE FROM subscription WHERE customer_id = "+ customer_id +";";
         UpdateDB(SQL);
     }
     

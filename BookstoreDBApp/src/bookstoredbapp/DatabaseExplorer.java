@@ -33,7 +33,7 @@ public class DatabaseExplorer {
     }
 
     public void findCustomersViaTelephoneNumber(String telephoneNumber) {
-        String SQL = "SELECT customer_name FROM customers WHERE phone_number = '" + telephoneNumber + "'";
+        String SQL = "SELECT customer_id, customer_name FROM customers WHERE phone_number = '" + telephoneNumber + "'";
         exploreDB(SQL, 1);
     }
 
@@ -54,7 +54,7 @@ public class DatabaseExplorer {
     }
 
     public void customersByComicBookSeriesSubscribed(String series) {
-        String SQL = "SELECT customer_name FROM subscription, customers WHERE series_title = '" + series + "' AND subscription.customer_id = customers.customer_id";
+        String SQL = "SELECT customer_id, customer_name FROM subscription, customers WHERE series_title = '" + series + "' AND subscription.customer_id = customers.customer_id";
         exploreDB(SQL, 1);
     }
 
@@ -87,8 +87,9 @@ public class DatabaseExplorer {
                         break;
                     case 1:
                         String customer_name = rs.getString("customer_name");
-                        displayData.add(customer_name);
-                        System.out.println(customer_name);
+                        int customer_id = rs.getInt("customer_id");
+                        displayData.add(Integer.toString(customer_id) + " "+ customer_name);
+                        System.out.println(Integer.toString(customer_id) + " "+ customer_name);
                         break;
                     case 2:
                         String series_title_on_given_day = rs.getString("series_title");
