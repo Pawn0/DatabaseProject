@@ -99,11 +99,12 @@ public class DatabaseSystem {
                         System.out.println("4. Change Date Comic Book Released");
                         System.out.println("5. Delete Customer");
                         System.out.println("6. Delete All Subscriptions for Customer");
-                        System.out.println("7. Exit");
+                        System.out.println("7. Delete One Subscription for Customer");
+                        System.out.println("8. Exit");
                         System.out.print("Please enter selection:");
                         selection = scanner.nextInt();
                         scanner.nextLine();
-                        if (selection != 7){
+                        if (selection != 8){
                             switch(selection){
                                 case 1:
                                     System.out.println("Please enter the customer information:");
@@ -144,7 +145,9 @@ public class DatabaseSystem {
                                     System.out.print("Book ID: ");
                                     int bookId = scanner.nextInt();
                                     scanner.nextLine();
-                                    databaseUpdater.changeDateComicBookIsReleased(date, bookId);
+                                    System.out.print("Series Title:");
+                                    seriesTitle = scanner.nextLine();
+                                    databaseUpdater.changeDateComicBookIsReleased(date, bookId, seriesTitle);
                                     break;
                                 case 5:
                                     System.out.println("Please enter the ID number of the customer to delete");
@@ -159,6 +162,15 @@ public class DatabaseSystem {
                                     customer_id = scanner.nextInt();
                                     scanner.nextLine();
                                     databaseUpdater.deleteAllSubscriptionForCustomer(customer_id);
+                                    break;
+                                case 7:
+                                    System.out.println("Please enter customer to delete ONE subscriptions for");
+                                    System.out.print("Customer ID:");
+                                    customer_id = scanner.nextInt();
+                                    scanner.nextLine();
+                                    System.out.print("Series Title:");
+                                    seriesTitle = scanner.nextLine();
+                                    databaseUpdater.deleteOneSubscriptionForCustomer(customer_id, seriesTitle);
                                     break;
                             }
                         }

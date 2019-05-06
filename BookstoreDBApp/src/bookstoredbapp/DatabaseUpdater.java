@@ -29,8 +29,8 @@ public class DatabaseUpdater {
         UpdateDB(SQL);
     }
 
-    public void changeDateComicBookIsReleased(String date, int comic_book_id) {
-        String SQL = "UPDATE comic_book SET  issue_date = '" + date + "' WHERE comic_book_id = "+comic_book_id +";";
+    public void changeDateComicBookIsReleased(String date, int comic_book_id, String series_title) {
+        String SQL = "UPDATE comic_book_belongs_to SET  issue_date = '" + date + "' WHERE comic_book_id = "+comic_book_id +" AND series_title='"+series_title+"';";
         UpdateDB(SQL);
     }
 
@@ -45,8 +45,8 @@ public class DatabaseUpdater {
         UpdateDB(SQL);
     }
     
-    public void deleteOneSubscriptionForCustomer(int subscription_id){
-        String SQL = "DELETE FROM subscription WHERE subscription_id = " + subscription_id + ";";
+    public void deleteOneSubscriptionForCustomer(int customer_id, String series_title){
+        String SQL = "DELETE FROM subscription WHERE customer_id = " + customer_id + " and series_title =" + series_title  +";";
         UpdateDB(SQL);
     }
 }
